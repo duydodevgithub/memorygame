@@ -1,10 +1,13 @@
 console.log("From main.js");
 let imgArray = ["batman.png", "blackpanther.png", "captain.png", "hulk.png", "ironman.png", "spiderman.png", "superman.png", "thor.png"];
 imgArray = imgArray.concat(imgArray);
-//sort array randomlly
+//sort array randomlly when page loaded
 imgArray.sort(function(a, b) {return 0.5 - Math.random()});
 let firstMove = false, secondMove = false;
-
+let numMove;
+var win = 0;
+//this variable is to make sure user can't click on 3 cards
+var allowToClick = true;
 //function to map imgArray with card
 
 function imgMap(id) {
@@ -47,14 +50,19 @@ function start() {
 
 //change background img when click
 function handleClick(card) {
-    if (firstMove && secondMove === false) {
-        card.style.background = 'url("assets/img/' + imgMap(card.id) + '")';
-        secondMove = card;
-        setTimeout(function(){checkWin(firstMove, secondMove)}, 500);
-    } else {
-        card.style.background = 'url("assets/img/' + imgMap(card.id) + '")';
-        firstMove = card;
-        console.log(firstMove);
+    if(allowToClick) {
+        if (firstMove && secondMove === false) {
+            card.style.background = 'url("assets/img/' + imgMap(card.id) + '")';
+            secondMove = card;
+            card.style.pointerEvents = "none";        
+            setTimeout(function(){checkWin(firstMove, secondMove)}, 1000);
+            allowToClick = !allowToClick;
+        } else {
+            card.style.background = 'url("assets/img/' + imgMap(card.id) + '")';
+            firstMove = card;
+            card.style.pointerEvents = "none" ;
+            // console.log(firstMove);
+        }
     }
 }
 
@@ -63,19 +71,27 @@ function checkWin(card1, card2) {
     if(card1.style.background === card2.style.background) {
         firstMove = false;
         secondMove = false;
-        card1.onclick = false;
+        // card1.onclick = false;
         card2.onclick = false;
-        
+        numMove += 1;
+        win += 1;
+        allowToClick = true;
+        if(win === 8) {
+            //display winner screen
+            const getContentId = document.getElementById("grid");
+            getContentId.innerHTML = ("<div>Winner in " + numMove + " moves</div>");
+        }
     } else {
         firstMove = false;
         secondMove = false;
         card1.style.background = "url('assets/img/question.png')";
+        card1.style.pointerEvents = "auto" ;        
         card2.style.background = "url('assets/img/question.png')";
+        card2.style.pointerEvents = "auto";
+        numMove += 1;    
+        allowToClick = true;            
     }
 }
 
 // reset game
-const reset = document.getElementById("reset");
-reset.addEventListener("click", function(){start()});
-
 start();
