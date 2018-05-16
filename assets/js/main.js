@@ -35,8 +35,9 @@ function imgMap(id) {
 
 //start game , create cards grid 4 x 4
 function start() {
+    document.getElementById("result").style.visibility = "visible";    
     numMove = 0;
-    document.getElementById("number").innerText = numMove;    
+    document.getElementById("number").innerText = numMove;   
     win = 0;
     let grid = "";
     for(let i = 0; i < 4; i++){
@@ -72,12 +73,6 @@ function handleClick(card) {
 //check match
 function checkWin(card1, card2) {
     if(card1.style.background === card2.style.background) {
-        if(win === 8) {
-            //display winner screen
-            const getContentId = document.getElementById("cards");
-            getContentId.innerHTML = ("<div>Congratulations! You win in " + numMove + " moves</div>");
-        }
-
         firstMove = false;
         secondMove = false;
         // card1.onclick = false;
@@ -86,7 +81,12 @@ function checkWin(card1, card2) {
         win += 1;
         allowToClick = true;
         document.getElementById("number").innerText = numMove;
-        
+        if(win === 8) {
+            //display winner screen
+            document.getElementById("result").style.visibility = "hidden";
+            const getContentId = document.getElementById("grid");
+            getContentId.innerHTML = ("<div>Congratulations! You win in " + numMove + " moves</div><button onclick='start()'>Play Again!</button>");
+        }
     } else {
         firstMove = false;
         secondMove = false;
@@ -101,7 +101,7 @@ function checkWin(card1, card2) {
 }
 
 //reset game
-const btnReset = document.getElementById("btnReset").addEventListener("click", function() {
+document.getElementById("btnReset").addEventListener("click", function() {
     start();
 })
 
