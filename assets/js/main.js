@@ -1,4 +1,4 @@
-console.log("From main.js");
+// console.log("From main.js");
 let imgArray = ["batman.png", "blackpanther.png", "captain.png", "hulk.png", "ironman.png", "spiderman.png", "superman.png", "thor.png"];
 imgArray = imgArray.concat(imgArray);
 //sort array randomlly when page loaded
@@ -35,6 +35,9 @@ function imgMap(id) {
 
 //start game , create cards grid 4 x 4
 function start() {
+    numMove = 0;
+    document.getElementById("number").innerText = numMove;    
+    win = 0;
     let grid = "";
     for(let i = 0; i < 4; i++){
         grid += "<tr>";
@@ -69,6 +72,12 @@ function handleClick(card) {
 //check match
 function checkWin(card1, card2) {
     if(card1.style.background === card2.style.background) {
+        if(win === 8) {
+            //display winner screen
+            const getContentId = document.getElementById("cards");
+            getContentId.innerHTML = ("<div>Congratulations! You win in " + numMove + " moves</div>");
+        }
+
         firstMove = false;
         secondMove = false;
         // card1.onclick = false;
@@ -77,11 +86,7 @@ function checkWin(card1, card2) {
         win += 1;
         allowToClick = true;
         document.getElementById("number").innerText = numMove;
-        if(win === 8) {
-            //display winner screen
-            const getContentId = document.getElementById("grid");
-            getContentId.innerHTML = ("<div>Winner in " + numMove + " moves</div>");
-        }
+        
     } else {
         firstMove = false;
         secondMove = false;
@@ -95,5 +100,10 @@ function checkWin(card1, card2) {
     }
 }
 
-// reset game
+//reset game
+const btnReset = document.getElementById("btnReset").addEventListener("click", function() {
+    start();
+})
+
+// start game
 start();
