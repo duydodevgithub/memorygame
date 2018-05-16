@@ -35,6 +35,9 @@ function imgMap(id) {
 
 //start game , create cards grid 4 x 4
 function start() {
+    document.getElementById("star1").classList.add("checked");
+    document.getElementById("star2").classList.add("checked");
+    document.getElementById("star3").classList.add("checked");
     document.getElementById("result").style.visibility = "visible";    
     numMove = 0;
     document.getElementById("number").innerText = numMove;   
@@ -78,6 +81,7 @@ function checkWin(card1, card2) {
         // card1.onclick = false;
         card2.onclick = false;
         numMove += 1;
+        rating(numMove);
         win += 1;
         allowToClick = true;
         document.getElementById("number").innerText = numMove;
@@ -85,7 +89,8 @@ function checkWin(card1, card2) {
             //display winner screen
             document.getElementById("result").style.visibility = "hidden";
             const getContentId = document.getElementById("grid");
-            getContentId.innerHTML = ("<div>Congratulations! You win in " + numMove + " moves</div><button onclick='start()'>Play Again!</button>");
+            const rating = document.getElementById("rating").innerHTML;
+            getContentId.innerHTML = (rating + "<div>Congratulations! You win in " + numMove + " moves</div><button onclick='start()'>Play Again!</button>");
         }
     } else {
         firstMove = false;
@@ -95,8 +100,22 @@ function checkWin(card1, card2) {
         card2.style.background = "url('assets/img/question.png')";
         card2.style.pointerEvents = "auto";
         numMove += 1;    
+        rating(numMove);        
         allowToClick = true;         
         document.getElementById("number").innerText = numMove;           
+    }
+}
+
+//rating function
+function rating(num) {
+    if(num < 9) {
+        document.getElementById("star1").classList.add("checked");
+        document.getElementById("star2").classList.add("checked");
+        document.getElementById("star3").classList.add("checked");
+    } else if (num < 14) {
+        document.getElementById("star3").classList.remove("checked");
+    } else  {
+        document.getElementById("star2").classList.remove("checked");
     }
 }
 
