@@ -4,7 +4,7 @@ imgArray = imgArray.concat(imgArray);
 //sort array randomlly when page loaded
 imgArray.sort(function(a, b) {return 0.5 - Math.random()});
 let firstMove = false, secondMove = false;
-let numMove;
+let numMove = 0;
 var win = 0;
 //this variable is to make sure user can't click on 3 cards
 var allowToClick = true;
@@ -76,6 +76,7 @@ function checkWin(card1, card2) {
         numMove += 1;
         win += 1;
         allowToClick = true;
+        document.getElementById("number").innerText = numMove;
         if(win === 8) {
             //display winner screen
             const getContentId = document.getElementById("grid");
@@ -89,7 +90,8 @@ function checkWin(card1, card2) {
         card2.style.background = "url('assets/img/question.png')";
         card2.style.pointerEvents = "auto";
         numMove += 1;    
-        allowToClick = true;            
+        allowToClick = true;         
+        document.getElementById("number").innerText = numMove;           
     }
 }
 
