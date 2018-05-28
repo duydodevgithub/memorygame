@@ -41,12 +41,3 @@ td:hover {
 .checked {
     color: orange;
 }
-
-@media screen and (max-width: 470px) {
-    .card {
-        width: 60px;
-        height: 60px;
-        background: url("../img/question_small.png");
-        text-align: center;
-    }
-}
