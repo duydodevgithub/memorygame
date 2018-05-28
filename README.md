@@ -8,6 +8,7 @@ Player click on to each question to see the card image.
 If two cards are keep openned if they are a matching pair.
 Win when all cards are openned.
 
+![alt text](assets/memory.png "Description goes here")
 
 ## Deployment
 
@@ -24,6 +25,6 @@ v1.0
 
 ## Authors
 
-* **Duy Do** - *Initial work* - [PurpleBooth](https://github.com/duydodevgithub)
+* **Duy Do**
 
 
