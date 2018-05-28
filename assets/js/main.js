@@ -139,7 +139,7 @@ function checkWin(card1, card2) {
             document.getElementById("result").style.visibility = "hidden";
             const getContentId = document.getElementById("grid");
             const rating = document.getElementById("rating").innerHTML;
-            getContentId.innerHTML = (rating + "<div>Congratulations! You win in " + numMove + " moves. Duration: "+ time +".</div><button onclick='start()'>Play Again!</button>");
+            getContentId.innerHTML = (rating + "<div id='congratz'>Congratulations! You win in " + numMove + " moves. Duration: "+ time +".</div><button onclick='start()'>Play Again!</button>");
         }
     } else {
         firstMove = false;

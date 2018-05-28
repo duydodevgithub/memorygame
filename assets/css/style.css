@@ -42,6 +42,10 @@ td:hover {
     color: orange;
 }
 
+#congratz {
+    margin: 20px;
+}
+
 @media screen and (max-width: 470px) {
     .card {
         width: 60px;
