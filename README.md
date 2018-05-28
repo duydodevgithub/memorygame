@@ -8,7 +8,7 @@ Player click on to each question to see the card image.
 If two cards are keep openned if they are a matching pair.
 Win when all cards are openned.
 
-![memory game](assets/memory.png "Memory Game")
+![](assets/memory.png "Memory Game")
 
 ## Deployment
 
