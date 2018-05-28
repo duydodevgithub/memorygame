@@ -33,8 +33,53 @@ function imgMap(id) {
     return imgName;
 }
 
+//timer
+let intervalId;
+let clockRunning = false;
+const stopwatch = {
+    time: 0,
+    start: function() {
+        this.time = 0;
+        if(!clockRunning) {
+            intervalId = setInterval(stopwatch.count, 1000);
+            clockRunning = true;
+        }
+    },
+    count: function() {
+        stopwatch.time++;
+        let time = stopwatch.timeConverter(stopwatch.time);
+        const displayTime = document.getElementById("timer");
+        displayTime.innerText = time;
+    },
+    timeConverter: function(t) {
+
+        var minutes = Math.floor(t / 60);
+        var seconds = t - (minutes * 60);
+    
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+    
+        if (minutes === 0) {
+          minutes = "00";
+        }
+        else if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+    
+        return minutes + ":" + seconds;
+      },
+    stop: function() {
+        clearInterval(intervalId);
+        clockRunning = false;
+    }
+    
+}
+
+
 //start game , create cards grid 4 x 4
 function start() {
+    stopwatch.start();
     document.getElementById("star1").classList.add("checked");
     document.getElementById("star2").classList.add("checked");
     document.getElementById("star3").classList.add("checked");
@@ -73,6 +118,8 @@ function handleClick(card) {
     }
 }
 
+
+
 //check match
 function checkWin(card1, card2) {
     if(card1.style.background === card2.style.background) {
@@ -87,10 +134,12 @@ function checkWin(card1, card2) {
         document.getElementById("number").innerText = numMove;
         if(win === 8) {
             //display winner screen
+            stopwatch.stop();
+            let time = document.getElementById("timer").innerText;
             document.getElementById("result").style.visibility = "hidden";
             const getContentId = document.getElementById("grid");
             const rating = document.getElementById("rating").innerHTML;
-            getContentId.innerHTML = (rating + "<div>Congratulations! You win in " + numMove + " moves</div><button onclick='start()'>Play Again!</button>");
+            getContentId.innerHTML = (rating + "<div>Congratulations! You win in " + numMove + " moves. Duration: "+ time +".</div><button onclick='start()'>Play Again!</button>");
         }
     } else {
         firstMove = false;
