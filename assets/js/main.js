@@ -79,6 +79,7 @@ const stopwatch = {
 
 //start game , create cards grid 4 x 4
 function start() {
+    imgArray.sort(function(a, b) {return 0.5 - Math.random()});
     stopwatch.start();
     document.getElementById("star1").classList.add("checked");
     document.getElementById("star2").classList.add("checked");
