@@ -5,9 +5,9 @@ imgArray = imgArray.concat(imgArray);
 imgArray.sort(function(a, b) {return 0.5 - Math.random()});
 let firstMove = false, secondMove = false;
 let numMove = 0;
-var win = 0;
+let win = 0;
 //this variable is to make sure user can't click on 3 cards
-var allowToClick = true;
+let allowToClick = true;
 //function to map imgArray with card
 
 function imgMap(id) {
@@ -170,6 +170,10 @@ function rating(num) {
 
 //reset game
 document.getElementById("btnReset").addEventListener("click", function() {
+    firstMove = false;
+    secondMove = false;
+    allowToClick = true;
+    imgArray.sort(function(a, b) {return 0.5 - Math.random()});
     start();
 })
 
