@@ -1,6 +1,4 @@
-# Project Title
-
-Memory Game
+# Memory Game
 
 ### How the game is played
 It requires observation, concentration and a good memory to win.
